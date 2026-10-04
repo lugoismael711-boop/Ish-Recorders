@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ish Recorders</title>
+  <meta name="description" content="Record audio and transcribe it live, right in your browser." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <h1>Ish Recorders</h1>
+    </div>
+    <p class="tagline">Record &amp; transcribe — everything stays in your browser.</p>
+  </header>
+
+  <main>
+    <!-- Recorder -->
+    <section class="recorder card" aria-label="Recorder">
+      <div class="status-row">
+        <span id="statusDot" class="status-dot idle" aria-hidden="true"></span>
+        <span id="statusText" class="status-text">Ready</span>
+        <span id="timer" class="timer">00:00</span>
+      </div>
+
+      <canvas id="visualizer" class="visualizer" height="96" aria-hidden="true"></canvas>
+
+      <div class="controls">
+        <button id="recordBtn" class="btn btn-record" type="button">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">Record</span>
+        </button>
+        <button id="pauseBtn" class="btn btn-ghost" type="button" disabled>Pause</button>
+        <button id="stopBtn" class="btn btn-ghost" type="button" disabled>Stop &amp; Save</button>
+      </div>
+
+      <div class="live-wrap">
+        <label class="live-label">
+          Live transcript
+          <span id="sttBadge" class="badge">checking…</span>
+        </label>
+        <div id="liveTranscript" class="live-transcript" aria-live="polite">
+          <span class="placeholder">Your speech will appear here as you talk…</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recordings list -->
+    <section class="library card" aria-label="Saved recordings">
+      <div class="library-head">
+        <h2>Recordings</h2>
+        <span id="count" class="count">0</span>
+      </div>
+      <ul id="recordingList" class="recording-list"></ul>
+      <p id="emptyState" class="empty-state">No recordings yet. Hit <strong>Record</strong> to make your first one.</p>
+    </section>
+  </main>
+
+  <!-- Recording row template -->
+  <template id="rowTemplate">
+    <li class="recording" data-id="">
+      <div class="rec-main">
+        <input class="rec-title" type="text" aria-label="Recording title" />
+        <div class="rec-meta">
+          <span class="rec-date"></span>
+          <span class="rec-dur"></span>
+        </div>
+        <audio class="rec-audio" controls preload="none"></audio>
+        <details class="rec-transcript-wrap">
+          <summary>Transcript</summary>
+          <textarea class="rec-transcript" rows="4" aria-label="Transcript" placeholder="(no transcript)"></textarea>
+        </details>
+      </div>
+      <div class="rec-actions">
+        <button class="btn btn-mini act-copy" type="button" title="Copy transcript">Copy</button>
+        <button class="btn btn-mini act-audio" type="button" title="Download audio">Audio</button>
+        <button class="btn btn-mini act-txt" type="button" title="Download transcript">Text</button>
+        <button class="btn btn-mini btn-danger act-delete" type="button" title="Delete">Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <footer class="footer">
+    <span>Works best in Chrome or Edge (live transcription uses the Web Speech API).</span>
+  </footer>
+
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
