@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Train Home</title>
+  <meta name="description" content="Find the quickest train home from where you are right now." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="train.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🚆 Train Home</h1>
+    <p class="tagline">The quickest train home from where you are right now.</p>
+  </header>
+
+  <main>
+    <!-- Setup (shown until a key + home address are saved, or when editing) -->
+    <section id="setup" class="card" hidden>
+      <h2>Setup</h2>
+      <form id="setupForm">
+        <label>Home address
+          <input id="homeInput" type="text" autocomplete="street-address" placeholder="123 Main St, Brooklyn, NY" required />
+        </label>
+        <label>Google Maps API key
+          <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…" required />
+        </label>
+        <p class="hint">
+          The key needs <strong>Routes API</strong> and <strong>Maps JavaScript API</strong> enabled in
+          <a href="https://console.cloud.google.com/google/maps-apis" target="_blank" rel="noopener">Google Cloud</a>.
+          It's saved only in this browser — never uploaded anywhere except to Google.
+        </p>
+        <div class="row">
+          <button class="btn" type="submit">Save</button>
+          <button id="cancelSetup" class="btn btn-ghost" type="button" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Main -->
+    <section id="finder" class="card" hidden>
+      <form id="searchForm" class="search">
+        <label>From
+          <input id="fromInput" type="text" placeholder="📍 My current location" />
+        </label>
+        <div class="row">
+          <label class="check"><input id="trainsOnly" type="checkbox" checked /> Trains only (no buses)</label>
+          <button id="editSetup" class="link" type="button">Change home / key</button>
+        </div>
+        <button id="goBtn" class="btn btn-big" type="submit">Get me home</button>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section id="results" hidden>
+      <div id="best" class="card best"></div>
+      <div id="map" class="map card" hidden></div>
+      <div id="othersWrap" class="card" hidden>
+        <h2>Other options</h2>
+        <ul id="others" class="others"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="train.js"></script>
+</body>
+</html>

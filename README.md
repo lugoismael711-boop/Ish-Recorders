@@ -48,6 +48,19 @@ add it to your library.
 No build step, no dependencies. `index.html`, `css/styles.css`, and the two
 scripts in `js/` are the whole app.
 
+## Train Home (`train/`)
+
+A separate mini-app: open `train/index.html` and it tells you the **quickest train
+home** from where you are right now — when to leave, which lines to take, and when
+you'll get home — plus a map of the route and other options.
+
+- Uses Google's **Routes API** (transit directions) and **Maps JavaScript API** (the map).
+- First run asks for your home address and a Google Maps API key. Both are saved
+  only in your browser (`localStorage`), never committed or uploaded anywhere but Google.
+- Create a key at <https://console.cloud.google.com/google/maps-apis>, enable
+  *Routes API* and *Maps JavaScript API*, and ideally restrict it to your site's URL.
+- "Trains only" limits results to subway/rail/light rail; untick it to allow buses.
+
 ## Privacy
 
 All data stays in your browser. Clearing your browser's site data for this page
